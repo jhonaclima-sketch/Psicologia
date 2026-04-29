@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cartão Digital - Alessandra Bernardes</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="card" id="main-card">
+        <div class="actions">
+            <button onclick="share()" class="btn-icon"><i data-lucide="share-2"></i></button>
+            <button onclick="toggleEdit()" id="edit-btn" class="btn-icon"><i data-lucide="edit-2"></i></button>
+        </div>
+
+        <div class="header-bg"></div>
+
+        <div class="profile-section">
+            <div class="photo-container">
+                <img id="profile-img" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=256&h=256" alt="Foto">
+                <div class="photo-overlay" onclick="document.getElementById('input-file').click()">
+                    <i data-lucide="camera"></i>
+                    <span>Mudar</span>
+                </div>
+                <input type="file" id="input-file" hidden onchange="updatePhoto(event)">
+                <div class="status-dot"></div>
+            </div>
+
+            <h1 id="user-name" contenteditable="false">Alessandra Bernardes</h1>
+            <p class="subtitle">Psicologia Clínica • CRP Ativo</p>
+            
+            <div class="badge">
+                <i data-lucide="video"></i> Atendimento Online
+            </div>
+
+            <p id="user-bio" class="bio" contenteditable="false">
+                Ajudando você a encontrar equilíbrio emocional através do autoconhecimento.
+            </p>
+
+            <div class="links">
+                <a href="https://wa.me/5542988005615" target="_blank" class="link-btn primary">
+                    <i data-lucide="phone"></i>
+                    <span>Agendar Consulta</span>
+                </a>
+                <a href="#" class="link-btn">
+                    <i data-lucide="instagram"></i>
+                    <span>Instagram</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+:root {
+    --primary: #0d9488;
+    --primary-light: #f0fdfa;
+    --text: #1e293b;
+    --bg: #f5f5f4;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.card {
+    width: 100%;
+    max-width: 380px;
+    background: white;
+    border-radius: 24px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    overflow: hidden;
+    position: relative;
+}
+
+.header-bg {
+    height: 140px;
+    background: linear-gradient(135deg, #0d9488, #065f46);
+}
+
+.actions {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+}
+
+.btn-icon {
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: white;
+    padding: 8px;
+    border-radius: 50%;
+    cursor: pointer;
+    backdrop-filter: blur(5px);
+}
+
+.profile-section {
+    padding: 0 20px 30px;
+    text-align: center;
+    margin-top: -60px;
+}
+
+.photo-container {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 15px;
+    position: relative;
+    border: 5px solid white;
+    border-radius: 50%;
+    background: white;
+}
+
+.photo-container img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.photo-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    border-radius: 50%;
+    display: none; /* Só aparece no modo edição */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+.edit-mode .photo-overlay { display: flex; }
+
+.status-dot {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    width: 15px;
+    height: 15px;
+    background: #22c55e;
+    border: 3px solid white;
+    border-radius: 50%;
+}
+
+h1 { font-size: 22px; color: var(--text); margin: 0; }
+.subtitle { color: var(--primary); font-size: 14px; font-weight: 600; margin: 5px 0; }
+.badge { background: var(--primary-light); color: var(--primary); padding: 5px 15px; border-radius: 20px; font-size: 12px; display: inline-flex; align-items: center; gap: 5px; margin-bottom: 15px; }
+
+.bio { font-size: 14px; color: #64748b; line-height: 1.5; padding: 0 20px; }
+
+.edit-mode [contenteditable="true"] {
+    outline: 2px solid var(--primary);
+    background: #f8fafc;
+    border-radius: 4px;
+}
+
+.links { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+.link-btn {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: 0.3s;
+    background: #f1f5f9;
+    color: var(--text);
+}
+.link-btn.primary { background: var(--primary); color: white; }
